@@ -1,0 +1,19 @@
+class Solution(object):
+    def findMinNum(self, nums: List[int]) -> int:
+        """
+        Find the minimal number in the given list by divide-and-conquer
+        """
+        if len(nums) == 0:
+            return
+        elif len(nums) == 1:
+            return nums[0]
+        else:
+            length = len(nums)
+            i = self.findMinNum(nums[:length // 2])
+            j = self.findMinNum(nums[length // 2:])
+            return min(i, j)
+
+if __name__ == "__main__":
+    find = Solution()
+    nums = [4,5,2,5,2,8,31,0,5,73,23,67,1]
+    print(find.findMinNum(nums))
