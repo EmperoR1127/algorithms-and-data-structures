@@ -1,0 +1,24 @@
+class Solution(object):
+    def findMedian(self, nums_a: List[int], nums_b: List[int]) -> int:
+        """
+        You are given two sorted arrays nums_a and nums_b, both of them contain n elements.           Find the median of the array you would get by merging A and B. Your algorithm must             take O(log(n)) time. The median number is the (n // 2)-th number.
+        """
+        if not nums_a and nums_b:
+            return nums_b[(len(nums_b) - 1) // 2]
+        if nums_a and not nums_b:
+            return nums_a[(len(nums_a) - 1) // 2]
+        mid_a, mid_b = (len(nums_a) - 1) // 2, (len(nums_b) - 1) // 2
+        if nums_a[mid_a] == nums_b[mid_b]:
+            return nums_a[mid_a]
+        elif nums_a[mid_a] < nums_b[mid_b]:
+            return self.findMedian(nums_a[mid_a + 1:], nums_b[:mid_b])
+        else:
+            return self.findMedian(nums_a[:mid_a + 1], nums_b[mid_b + 1:])
+
+if __name__ == "__main__":
+    nums_a = [3,7,10,12,15,19,23,25,28,29]
+    nums_b = [5,9,11,17,20,30,45,55,57,60]
+    find = Solution()
+    num = find.findMedian(nums_a, nums_b)
+    print("num = " + str(num))
+            
