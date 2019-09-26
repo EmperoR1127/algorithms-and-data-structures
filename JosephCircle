@@ -1,0 +1,17 @@
+class JosephCircle(object):
+    def josephCircle(self, n, m):
+        """
+        Classic joseph problem: n soldiers circle around, kill the m-th soldier in the circle per around, calculate the last soldier.
+        :type n: int, total number of soldiers
+        :type m: int, remove the m-th soldiers
+        :rtype: int, the surviving soldiers
+        """
+        if n == 1:
+            return n
+        return (self.josephCircle(n - 1, m) + m - 1) % n + 1
+
+if __name__ == '__main__':
+    n = 123
+    m = 5
+    joseph = JosephCircle()
+    print joseph.josephCircle(n, m)
