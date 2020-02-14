@@ -1,0 +1,44 @@
+class Solution:
+    def count_inversion(self, nums: List[int]) -> int:
+        """
+        Counting inversions, a inversion is an pair of element a[i] and a[j], such that i < j         and a[i] > a[j]
+        """
+        return self.sort_and_count(nums)[1]
+        
+    def sort_and_count(self, nums: List[int]) -> (List[int], int):
+        """
+        Using divide and conquer technique. Divide the list into two equal half, and
+        recursively sort and count the list. Combine the results like mergesort.
+        Running time: O(nlogn)
+        """
+        if len(nums) <= 1:
+            return nums, 0
+        else:
+            left_list, l = self.sort_and_count(nums[:len(nums) // 2])
+            right_list, r = self.sort_and_count(nums[len(nums) // 2:])
+            res = []
+            left, right, re = 0, 0, 0
+            while left < len(left_list) or right < len(right_list):
+                left_num, right_num = float("inf"), float("inf")
+                if left < len(left_list):
+                    left_num = left_list[left]
+                if right < len(right_list):
+                    right_num = right_list[right]
+                #always append the smaller element to the list, just like mergesort
+                if left_num > right_num:
+                    re += len(left_list) - left  #the number of inversions between two lists
+                    res.append(right_num)
+                    right += 1
+                else:
+                    res.append(left_num)
+                    left += 1
+            return res, l + r + re
+                
+
+if __name__ == "__main__":
+    a = [1,5,4,8,10,2,6,9,12,11,3,7]
+    
+    m = Solution()
+    print(m.count_inversion(a))
+    
+    
