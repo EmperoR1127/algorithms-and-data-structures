@@ -49,7 +49,7 @@ class PositionalList(_DoublyLinkedBase):
     def before(self, p):
         """Return the position of L immediately before position p,
         or None
- if p is the first position
+        if p is the first position
         """
         node = self._validate(p)
         if node._prev == self._header: # the first node
@@ -59,7 +59,7 @@ class PositionalList(_DoublyLinkedBase):
     def after(self, p):
         """Return the position of L immediately after position p,
         or None if 
-p is the last position.
+        p is the last position.
         """
         node = self._validate(p)
         if node._next == self._tailer: # the last node
@@ -88,37 +88,33 @@ p is the last position.
     def add_first(self, e):
         """Insert a new element e at the front of L,
         returning the position
- of the new element.
+        of the new element.
         """
         return self._insert_between(e, self._header, self._header._next)
 
     def add_last(self, e):
         """Insert a new element e at the back of L,
-        returning the position
- of the new element
+        returning the position of the new element
         """
         return self._insert_between(e, self._tailer._prev, self._tailer)
 
     def add_before(self, e, p):
         """Insert a new element e just before position p in L,
-        returning
- the position of the new element.
+        returning the position of the new element.
         """
         node = self._validate(p)
         return self._insert_between(e, node._prev, node)
 
     def add_after(self, e, p):
         """Insert a new element e just after position p in L,
-        returning
- the position of the new element.
+        returning the position of the new element.
         """
         node = self._validate(p)
         return self._insert_between(e, node, node._next)
 
     def replace(self, p, e):
         """Replace the element at position p with element e,
-        returning
- the element formerly at position p.
+        returning the element formerly at position p.
         """
         node = self._validate(p)
         res, node._element = node._element, e
@@ -126,15 +122,13 @@ p is the last position.
 
     def delete(self, p):
         """Remove and return the element at position p in L,
-        invalidating
- the position.
+        invalidating the position.
         """
         node = self._validate(p) # retrieve the node about to delete
         return self._delete_node(node)
 
     def max(self):
-        """returns the maximum
- element from a PositionalList"""
+        """returns the maximum element from a PositionalList"""
         value = self.first().element()
         for walk in iter(self):
             if value < walk:
