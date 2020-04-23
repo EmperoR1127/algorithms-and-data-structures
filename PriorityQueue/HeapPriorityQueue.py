@@ -40,11 +40,23 @@ class HeapPriorityQueue(PriorityQueueBase):
         if self._data[i] > self._data[min_child]: # swap the item
             self._data[i], self._data[min_child] = self._data[min_child], self._data[i]
             self._downheap(min_child) # recursively downheap the child
+
+    def _heapify(self):
+        # no need to downheap the leaf node
+        start = self._parent(len(self._data) - 1)
+        for i in range(start, -1, -1): # construct the heap from bottom up
+            self._downheap(i)
         
 
     # -------- public methods --------
-    def __init__(self):
-        self._data = []
+    def __init__(self, contents = ()):
+        """Create a new priority queue. By default, queue will be empty.
+        If contents is given, it should be as an iterable sequence
+        of (k,v) tuples specifying the initial contents
+        """
+        self._data = [self._Item(key, value) for key, value in contents]
+        if len(self._data) > 1:
+            self._heapify()
 
     def __len__(self):
         return len(self._data)
@@ -72,11 +84,8 @@ class HeapPriorityQueue(PriorityQueueBase):
         return item._key, item._value
 
 if __name__ == "__main__":
-    pq = HeapPriorityQueue()
-    pq.add(3, "kb")
-    pq.add(2,"mj")
-    pq.add(5,"sd")
-    pq.add(4,"we")
+    pq = HeapPriorityQueue([(3, "kb"), (2,"mj"), (5,"sd"), (4,"we")])
+    print(pq.min())
     pq.add(1,"dfgdfg")
     print(pq.remove_min())
     print(pq.remove_min())
