@@ -81,8 +81,10 @@ class HeapPriorityQueue(PriorityQueueBase):
         self._data[0], self._data[-1]= self._data[-1], self._data[0]
         item = self._data.pop()
         self._downheap(0)
-        return item._key, item._value
-
+        return item._key, item._value    
+        
+        
+            
 if __name__ == "__main__":
     pq = HeapPriorityQueue([(3, "kb"), (2,"mj"), (5,"sd"), (4,"we")])
     print(pq.min())
@@ -93,6 +95,9 @@ if __name__ == "__main__":
     print(pq.remove_min())
     print(pq.remove_min())
     print(pq.remove_min())
+
+
+    
         
 
 
