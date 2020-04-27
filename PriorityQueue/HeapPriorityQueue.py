@@ -14,12 +14,15 @@ class HeapPriorityQueue(PriorityQueueBase):
         """Return the index of the left child of item locating in index i"""
         return 2 * i + 2 if 2 * i + 2 < len(self._data) else None
 
+    def _swap(self, i, j):
+        self._data[i], self._data[j] = self._data[j], self._data[i]
+
     def _upheap(self, i):
         """Upheap from index i"""
         idx_parent = self._parent(i) # the index of parent
         if i > 0 and self._data[i] < self._data[idx_parent]:
             # swap the item
-            self._data[i], self._data[idx_parent] = self._data[idx_parent], self._data[i]
+            self._swap(i, idx_parent)
             self._upheap(idx_parent) # recursively upheap the parent
 
     def _downheap(self, i):
@@ -38,7 +41,7 @@ class HeapPriorityQueue(PriorityQueueBase):
         else:
             min_child = right
         if self._data[i] > self._data[min_child]: # swap the item
-            self._data[i], self._data[min_child] = self._data[min_child], self._data[i]
+            self._swap(i, min_child)
             self._downheap(min_child) # recursively downheap the child
 
     def _heapify(self):
@@ -78,10 +81,23 @@ class HeapPriorityQueue(PriorityQueueBase):
         if self.is_empty():
             raise ValueError("The priority queue is empty")
         # swap the first and last item
-        self._data[0], self._data[-1]= self._data[-1], self._data[0]
+        self._swap(0, -1)
         item = self._data.pop()
         self._downheap(0)
-        return item._key, item._value    
+        return item._key, item._value
+
+def n_smallest(pq, k):
+    def _helper(pq, i, k):
+        if not (0 <= i < len(pq)):
+            return
+        if pq._data[i]._key > k:
+            return
+        print(pq._data[i]._key)
+        if pq._left(i):
+            _helper(pq, pq._left(i), k)
+        if pq._right(i):
+            _helper(pq, pq._right(i), k)
+    _helper(pq, 0, k)
         
         
             
@@ -89,12 +105,9 @@ if __name__ == "__main__":
     pq = HeapPriorityQueue([(3, "kb"), (2,"mj"), (5,"sd"), (4,"we")])
     print(pq.min())
     pq.add(1,"dfgdfg")
-    print(pq.remove_min())
-    print(pq.remove_min())
-    print(pq.remove_min())
-    print(pq.remove_min())
-    print(pq.remove_min())
-    print(pq.remove_min())
+
+    n_smallest(pq, 2)
+    
 
 
     
