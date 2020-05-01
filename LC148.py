@@ -3,7 +3,7 @@ Solution
 Approach 1: Divide and Conquer
 
 Intuition
-The time complexity is an typical hint of divide and conquer, plus we could utilize pointers to satisfy the space constraint.
+The time complexity is a typical hint of divide and conquer, plus we could utilize pointers to satisfy the space constraint.
 Similar as merge sort, recursively divide the linked list into two halves until the list has at most two nodes. 
 Swap the two nodes with respect to their values and return the heads, or just return the head if only one node in the list.
 Combine the lists and keep track the new head using a dummy node.
