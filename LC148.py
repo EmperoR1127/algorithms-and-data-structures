@@ -7,7 +7,7 @@ The time complexity is a typical hint of divide and conquer, plus we could utili
 Similar as merge sort, We need to identify a base case and the merge procedure.
 Base case: if a list has at most one node, the list is trivally sorted.
 Otherwise, divide the linked list into two halves and sort the two lists using recursion. 
-Merge the two lists and return the new head.
+Merge the two sorted lists similar to merge two sorted arrays and return the new head.
 
 However, unlike array, how can we efficiently locate the middle node in the list? We could use the two-pointer technique here.
 Initialize two pointers, slow and fast, respectively, and they both point to the head of the given list.
