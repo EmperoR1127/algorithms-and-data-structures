@@ -33,15 +33,8 @@ Space complexity: O(1). Only a constant number of pointers are initialized to di
 #         self.next = next
 class Solution:
     def sortList(self, head: ListNode) -> ListNode:
-        if (not head) or (not head.next): # base case 1: 0 or 1 node in the list
+        if (not head) or (not head.next): # base case: 0 or 1 node in the list
             return head
-        n = head.next
-        if not n.next: # base case 2: two nodes in the list
-            if head.val <= n.val: # already sorted
-                return head
-            else:
-                n.next, head.next = head, None # swap nodes
-                return n
         else:
             fast, slow = head, head
             # find the middle of the list
@@ -70,4 +63,4 @@ class Solution:
                     f_prev = f_prev.next # alternate f_prev for next iteration
             if not first: # when first is None, we need to merge the remaing nodes in second, if any
                 f_prev.next = second # merge the remaining nodes in second
-            return new_head.next
+            return new_head.next 
