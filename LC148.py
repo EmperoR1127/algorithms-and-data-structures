@@ -4,7 +4,7 @@ Approach 1: Divide and Conquer
 
 Intuition
 The time complexity is a typical hint of divide and conquer, plus we could utilize pointers to satisfy the space constraint.
-Similar as merge sort, We need to identify a base case and the recursion.
+Similar as merge sort, We need to identify a base case and the merge procedure.
 Base case: if a list has at most one node, the list is trivally sorted.
 Otherwise, divide the linked list into two halves and sort the two lists using recursion. 
 Merge the two lists and return the new head.
