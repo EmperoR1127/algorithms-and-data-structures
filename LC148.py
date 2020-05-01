@@ -11,9 +11,19 @@ Combine the lists and keep track the new head using a dummy node.
 However, unlike array, how can we efficiently locate the middle node in the list? We could use the two-pointer technique here.
 Initialize two pointer, slow and fast, respectively, and they both point to the head of the given list.
 Move fast to two nodes after its current position, if possible. In the meantime, move slow only one node along the list.
-When fast reaches the end of the list, slow is in the middle of the list, since fast always moves two times of nodes compared to slow.
+When fast reaches the end of the list, slow is in the middle of the list, since fast always moves two times of nodes 
+compared to slow.
 
-Restricted to the constant space complexity, we can't initialize another linked list to merge two lists, instead we can merge the second half of the list into the first half. 
+Restricted to the constant space complexity, we can't initialize another linked list to merge two lists, 
+instead we can merge the second half of the list into the first half. 
+
+Complexity Analysis
+
+Time complexity: O(nlogn). 
+Similar as the merge sort. The base cases are trivally sorted. In the merge part, we need to sort two lists with at most 
+n/2 nodes and combine n nodes together, with O(1) step each.
+T(n) = 2T(n/2) + O(n), T(n) = O(nlogn) according to master theorem.
+Space complexity: O(1). Only a constant number of pointer are used to divide and combine the linked list.
 """
 # Definition for singly-linked list.
 # class ListNode:
