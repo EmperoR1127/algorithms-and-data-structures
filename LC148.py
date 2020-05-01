@@ -33,10 +33,10 @@ Space complexity: O(1). Only a constant number of pointers are initialized to di
 #         self.next = next
 class Solution:
     def sortList(self, head: ListNode) -> ListNode:
-        if (not head) or (not head.next): # 0 or 1 node in the list
+        if (not head) or (not head.next): # base case 1: 0 or 1 node in the list
             return head
         n = head.next
-        if not n.next: # two nodes in the list
+        if not n.next: # base case 2: two nodes in the list
             if head.val <= n.val: # already sorted
                 return head
             else:
@@ -44,20 +44,22 @@ class Solution:
                 return n
         else:
             fast, slow = head, head
+            # find the middle of the list
             while fast.next:
                 fast = fast.next
                 if fast.next:
                     fast = fast.next
                 else:
-                    break
+                    break # fast reaches the end of the list
                 slow = slow.next
             last = slow
             slow, last.next = slow.next, None # split the two lists
             first, second = self.sortList(head), self.sortList(slow) # divide the list into two halves
-            f_prev = ListNode(None) # always point to the node before first
-            new_head, f_prev.next = f_prev, first
-            while first and second: # merge two lists
-                if first.val <= second.val:
+            f_prev = ListNode(None) 
+            new_head = f_prev # store the new head in a dummy node
+            f_prev.next = first # link f_prev to the first
+            while first and second: # merge second into first
+                if first.val <= second.val: # locate the node which is smaller than first.val
                     f_prev = first
                     first = first.next
                 else: # insert second between f_prev and first
@@ -65,7 +67,7 @@ class Solution:
                     second = second.next
                     curr.next = first
                     f_prev.next = curr
-                    f_prev = f_prev.next
-            if not first: # second may or may not has more nodes
-                f_prev.next = second
+                    f_prev = f_prev.next # alternate f_prev for next iteration
+            if not first: # when first is None, we need to merge the remaing nodes in second, if any
+                f_prev.next = second # merge the remaining nodes in second
             return new_head.next
