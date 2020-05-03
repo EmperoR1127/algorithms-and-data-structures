@@ -137,7 +137,7 @@ class LinkedBinaryTree(BinaryTree):
         node._element = e
         return old
 
-    def delete(self, p):
+    def _delete(self, p):
         """Delete the node at Position p, and replace it with its child, if any
         Return the element that had been stored at Position p.
         Raise ValueError if Position p is invalid or p has two children.
