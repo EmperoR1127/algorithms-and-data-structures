@@ -19,15 +19,12 @@ class TreeMap(LinkedBinaryTree, Mapbase):
         if p.key() == k:
             return p
         elif p.key() > k and self.left(p): # k should be in the left subtree of p, if any
-<<<<<<< HEAD
             return self._subtree_search(self.left(p), k)
         elif p.key() < k and self.right(p): # k should be in the right subtree of p, if any
             return self._subtree_search(self.right(p), k)
-=======
             self._subtree_search(self.left(p), k)
         elif p.key() < k and self.right(p): # k should be in the right subtree of p, if any
             self._subtree_search(self.right(p), k)
->>>>>>> ab653ab335ae3fc45842e2c03d711100ba2b259a
         else:
             return p # unsucessful search
 
@@ -87,12 +84,8 @@ class TreeMap(LinkedBinaryTree, Mapbase):
             while p and self.right(p) == walk:
                 walk, p = p, self.parent(p) # until find walk is the left child of parent
             return p
-
-<<<<<<< HEAD
+        
     def find_position(self, k):
-=======
-    def find_position(self, k)
->>>>>>> ab653ab335ae3fc45842e2c03d711100ba2b259a
         """Return position with key k, or else neighbor (or None if empty)"""
         if self.is_empty():
             return None
@@ -152,7 +145,6 @@ class TreeMap(LinkedBinaryTree, Mapbase):
                 p.element()._value = v
                 self._rebalance_access(p) # hook for balanced tree subclasses
                 return
-<<<<<<< HEAD
             else:
                 item = self._Item(k, v)
                 print(item._key)
@@ -160,12 +152,10 @@ class TreeMap(LinkedBinaryTree, Mapbase):
                     leaf = self.add_left(p, item)
                 else:
                     leaf = self.add_right(p, item)
-=======
             elif p.key() > k:
                 leaf = self.add_left(p, self._Item(k, v))
             else:
                 leaf = self.add_right(p, self._Item(k, v))
->>>>>>> ab653ab335ae3fc45842e2c03d711100ba2b259a
         self._rebalance_insert(leaf) # hook for balanced tree subclasses
 
     def __iter__(self):
@@ -174,7 +164,6 @@ class TreeMap(LinkedBinaryTree, Mapbase):
         while walk:
             yield walk.key()
             walk = self.after(walk)
-<<<<<<< HEAD
 
     def delete(self, p):
         """Remove the item at given Position"""
@@ -244,7 +233,9 @@ class TreeMap(LinkedBinaryTree, Mapbase):
 
     def _rebalance_insert(self, p):
         pass
-
+    
+    def _rebalance_access(self, p):
+        pass
     
 
 if __name__ == "__main__":
@@ -254,14 +245,10 @@ if __name__ == "__main__":
     tree[6] = "hk"
     #print(tree[5])
     
-=======
         
         
             
-    def _rebalance_access(self, p):
-        pass
-
->>>>>>> ab653ab335ae3fc45842e2c03d711100ba2b259a
+    
 
 
 
